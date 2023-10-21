@@ -91,19 +91,12 @@
   pip:
     name: "pretalx{{ pretalx_extra }}"
     state: latest  # noqa package-latest
-    virtualenv: "{{ pretalx_virtualenv | default(omit) }}"
+    virtualenv: "{{ pretalx_virtualenv  }}"
   notify:
     - Restart pretalx service
     - Restart worker service
     - Run pretalx migrations
-<<<<<<< HEAD
-    - Collect static pretalx files
-    - Compile pretalx javascript
-    - Compress static pretalx files
-    - Compile pretalx messages
-=======
     - Rebuild pretalx files
->>>>>>> origin/master
     - Compile pretalx styles
   when: (pretalx_version == 'latest') and not (pretalx_git_version)
   become: true
@@ -116,7 +109,7 @@
   pip:
     name: "pretalx{{ pretalx_extra }}"
     version: "{{ pretalx_version }}"  # noqa package-lastest
-    virtualenv: "{{ pretalx_virtualenv | default(omit) }}"
+    virtualenv: "{{ pretalx_virtualenv }}"
   notify:
     - Restart pretalx service
     - Restart worker service
@@ -134,7 +127,7 @@
   pip:
     name: "git+{{ pretalx_git_url }}@{{ pretalx_git_version }}#egg=pretalx{{ pretalx_extra }}"
     state: latest  # noqa package-latest
-    virtualenv: "{{ pretalx_virtualenv | default(omit) }}"
+    virtualenv: "{{ pretalx_virtualenv }}"
   notify:
     - Restart pretalx service
     - Restart worker service
