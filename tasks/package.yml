@@ -57,15 +57,11 @@
   become: true
   become_user: "{{ pretalx_system_user }}"
 
-- name: overwrite settings file for audit log
-  copy:
-    src: auditlog_settings.py
-    dest: /usr/share/webapps/pretalxevent/venv/lib/python3.11/site-packages/pretalx/settings.py
 - name: Configure pretalx
   template:
     src: pretalx.cfg.j2
     dest: "{{ pretalx_system_home }}/.pretalx.cfg"
-    mode: "0644"
+    mode: "0600"
   notify:
     - Restart pretalx service
     - Restart worker service
@@ -156,6 +152,11 @@
   tags:
     - pretalx
     - pretalxupdate
+
+- name: overwrite settings file for audit log
+  copy:
+    src: auditlog_settings.py
+    dest: /usr/share/webapps/pretalxevent/venv/lib/python3.11/site-packages/pretalx/settings.py
 
 - name: Make sure plugin directory exists
   file:
