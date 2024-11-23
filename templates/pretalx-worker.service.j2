@@ -10,6 +10,7 @@ WorkingDirectory={{ pretalx_virtualenv }}/lib/python{{ pretalx_system_python_ver
 Restart=on-failure
 ExecReload=/bin/kill -s HUP $MAINPID
 ExecStop=/bin/kill -s TERM $MAINPID
+Environment="DJANGO_SETTINGS_MODULE=pretalx.settings_pghistory"
 
 [Install]
 WantedBy=multi-user.target
