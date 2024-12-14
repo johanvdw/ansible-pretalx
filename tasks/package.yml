@@ -49,7 +49,7 @@
 - name: install django-pghistory for audit log
   pip:
     name:  django-pghistory
-    version: 2.8.0
+    version: 3.5.0
     virtualenv: "{{ pretalx_virtualenv }}"
   tags:
     - pretalx
